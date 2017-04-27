@@ -1,0 +1,135 @@
+/* General Styles */
+
+@font-face {
+    font-family: "open_sansregular";
+    src: url("../fonts/opensans-regular-webfont.woff2") format("woff2"),
+         url("../fonts/opensans-regular-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "open_sanssemibold";
+    src: url("../fonts/opensans-semibold-webfont.woff2") format("woff2"),
+         url("../fonts/opensans-semibold-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "source_sans_probold";
+    src: url("../fonts/sourcesanspro-bold-webfont.woff2") format("woff2"),
+         url("../fonts/sourcesanspro-bold-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "robotothin";
+    src: url("../fonts/roboto-thin-webfont.woff2") format("woff2"),
+         url("../fonts/roboto-thin-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+  /*Colors*/
+
+  /*Font Size*/
+}
+
+html,
+body {
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: inherit;
+}
+
+body,
+h2,
+ul,
+p {
+  margin: 0;
+}
+
+body {
+  font: 18px/1 "open_sansregular";
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+[class$="-container"] {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 55px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+/* Header */
+.header-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.header-logo {
+  text-indent: -9999px;
+  width: 22px;
+  height: 16px;
+  background: url("../img/bg-logo.png") no-repeat
+}
+
+.header-logo a {
+    display: block;
+}
+
+.navigation-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex
+}
+
+.navigation-list li {
+    margin-left: 35px;
+}
+
+.navigation-list li:first-child {
+    margin-left: 0;
+}
+
+.navigation-list a {
+    color: #212833;
+    font-size: 18px;
+}
+
+.download-btn {
+  font-size: 16px;
+  color: #212833;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #eaeef4;
+  padding: 8px 17px 8px 10px
+}
+
+.download-btn::before {
+    content: "";
+    background: url("../img/bg-download-btn.png") no-repeat;
+    width: 11px;
+    height: 13px;
+    display: inline-block;
+    margin-right: 14px;
+}
