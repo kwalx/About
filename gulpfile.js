@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const postcss = require('gulp-postcss');
 const cssnext = require('postcss-cssnext');
+const csscomb = require('gulp-csscomb');
 const babel = require('gulp-babel');
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
@@ -35,9 +36,7 @@ gulp.task('html', () => {
 });
 
 gulp.task('css', () => {
-  let processors = [
-    cssnext
-  ]
+  let processors = [cssnext];
   gulp
     .src('./appIn/cssIn/**/*.css')
     .pipe(
@@ -52,6 +51,7 @@ gulp.task('css', () => {
     )
     .pipe(postcss(processors))
     .pipe(rename('styles.css'))
+    .pipe(csscomb())
     .pipe(gulp.dest('./app/css/'))
     .pipe(browserSync.stream());
 });

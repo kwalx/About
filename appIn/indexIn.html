@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <link rel="stylesheet" href="css/styles.css">
-  <script src="js/main.js"></script>
+  <script defer async src="js/main.js"></script>
 </head>
 
 <body>
@@ -18,11 +18,11 @@
         <a href="#">Logo</a>
       </strong>
       <nav class="header-navigation">
-        <ul class="navigation-list">
-          <li><a href="#">story</a></li>
-          <li><a href="#">skills</a></li>
-          <li><a href="#">works</a></li>
-          <li><a href="#">contact</a></li>
+        <ul class="navigation-list" id="nav-list">
+          <li class="active"><a href="#story-section">story</a></li>
+          <li><a href="#skills-section">skills</a></li>
+          <li><a href="#works-section">works</a></li>
+          <li><a href="#contact-section">contact</a></li>
         </ul>
       </nav>
       <strong class="download">
@@ -33,15 +33,15 @@
   <!-- End Header -->
 
   <!-- Story Section -->
-  <section class="story-section">
+  <section class="story-section" id="story-section">
     <div class="story-container">
-      <div class="photo-block">
-        <!--<img src="img/img-main-photo.jpg" alt="Photography">-->
+      <div class="photo-block picture-frame">
+        <img src="img/img-main-photo.jpg" alt="Photography">
       </div>
       <div class="text-block">
         <div class="text-block-inner">
           <h2 class="heading">
-            <strong class="heading-shadow">Story</strong> Hello there!<br>i’m Alexander
+            <strong class="heading-shadow">Story</strong> <span class="heading-part-1">Hello there!<br>I’m </span><span class="heading-part-2">Alexander</span>
           </h2>
           <div class="text">
             <p>Front-End Web Developer from Kharkiv. I found my passion in web development at Spalah IT school. I try to do
@@ -53,6 +53,90 @@
     </div>
   </section>
   <!-- End Story Section -->
+
+  <!-- Skills Section -->
+  <section class="skills-section" id="skills-section">
+    <div class="skills-container flex-container-reverse">
+      <div class="picture-frame" id="skills-box">
+        <em class="skill">HTML 5</em>
+        <em class="skill">CSS 3</em>
+        <em class="skill">Git</em>
+        <em class="skill">Js</em>
+        <em class="skill">JQuery</em>
+        <em class="skill">PSD</em>
+      </div>
+      <div class="text-block">
+        <div class="text-block-inner">
+          <h2 class="heading">
+            <strong class="heading-shadow">Skills</strong> <span class="heading-part-1">What I </span><span class="heading-part-2">Know</span>
+          </h2>
+          <div class="text">
+            <p>I enjoy experimenting with new libraries, frameworks and try to be in tune with new trends. When I have free
+              minutes I'm reading or drawing.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Skills Section -->
+
+  <!-- Works Section -->
+  <section class="works-section" id="works-section">
+    <div class="works-container">
+      <div class="picture-frame">
+        <div class="work">
+          <a href="#" class="work-inner">
+            <h4 class="work-title">Old Cars</h4>
+          </a>
+        </div>
+        <div class="work">
+          <a href="#" class="work-inner">
+            <h4 class="work-title">Watches Project</h4>
+          </a>
+        </div>
+        <div class="work">
+          <a href="#" class="work-inner">
+            <h4 class="work-title">Fresh Fruits</h4>
+          </a>
+        </div>
+      </div>
+      <div class="text-block">
+        <div class="text-block-inner">
+          <h2 class="heading">
+            <strong class="heading-shadow">Works</strong> <span class="heading-part-1">What I </span><span class="heading-part-2">Do</span>
+          </h2>
+          <div class="text">
+            <p>Every project is a new experience and opportunity to learn. Most of all I like those ones that challenge me and
+              require new skills, knowledge and all my patience.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Works Section -->
+
+  <!-- Contact Section -->
+  <section class="contact-section" id="contact-section">
+    <div class="contact-container flex-container-reverse">
+      <div class="picture-frame">
+        <div class="bg-contact"></div>
+      </div>
+      <div class="text-block">
+        <div class="text-block-inner">
+          <h2 class="heading">
+            <strong class="heading-shadow">Contact</strong> <span class="heading-part-1">Say </span><span class="heading-part-2">Hi</span>
+          </h2>
+          <div class="text">
+            <strong class="tagline">I’m here to help.</strong><br>
+            <em class="email">Email me at 
+              <a href="mailto:alx.krivulya@gmail.com">alx.krivulya@gmail.com</a>
+            </em>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Contact Section -->
 </body>
 
 </html>

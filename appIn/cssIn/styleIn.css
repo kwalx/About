@@ -1,56 +1,58 @@
 /* General Styles */
 
 @font-face {
-    font-family: "open_sansregular";
-    src: url("../fonts/opensans-regular-webfont.woff2") format("woff2"),
-         url("../fonts/opensans-regular-webfont.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
+  font-family: "open_sansregular";
+  src: url("../fonts/opensans-regular-webfont.woff2") format("woff2"),
+        url("../fonts/opensans-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 @font-face {
-    font-family: "open_sanssemibold";
-    src: url("../fonts/opensans-semibold-webfont.woff2") format("woff2"),
-         url("../fonts/opensans-semibold-webfont.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
+  font-family: "open_sanssemibold";
+  src: url("../fonts/opensans-semibold-webfont.woff2") format("woff2"),
+        url("../fonts/opensans-semibold-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 @font-face {
-    font-family: "source_sans_probold";
-    src: url("../fonts/sourcesanspro-bold-webfont.woff2") format("woff2"),
-         url("../fonts/sourcesanspro-bold-webfont.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
+  font-family: "source_sans_probold";
+  src: url("../fonts/sourcesanspro-bold-webfont.woff2") format("woff2"),
+        url("../fonts/sourcesanspro-bold-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 @font-face {
-    font-family: "robotothin";
-    src: url("../fonts/roboto-thin-webfont.woff2") format("woff2"),
-         url("../fonts/roboto-thin-webfont.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
+  font-family: "robotothin";
+  src: url("../fonts/roboto-thin-webfont.woff2") format("woff2"),
+        url("../fonts/roboto-thin-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 :root {
-  /*Colors*/
   --colorMain: #212833;
+  --colorShadowHeading: #f4f4f5;
   --colorPageHeadingFirst: #1a1a1a;
   --colorPageHeadingSecond: #1160ff;
   --colorSkills: #fff;
   --bgActiveNavigationLink: #0055ff;
   --bgPage: #fff;
   --bgBorderBtn: #eaeef4;
-  --bgSkills: #3f4c69;
+  --bgSkillsBoxes: #3f4c69;
+  --bgWorksBoxes: #1e2c4b;
 
-  /*Font Size*/
   --FSizeMain: 18px;
   --FSizeNavigation: 18px;
   --FSizeDownloadBtn: 16px;
   --FSizeShadowHeading: 96px;
   --FSizePageHeading: 40px;
+  --LineHContent: 1.8;
   
   --widthMain: 1100px;
 
   --flex-container: {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
   }
 }
@@ -66,13 +68,21 @@ body {
 
 body,
 h2,
+h4,
 ul,
 p {
   margin: 0;
 }
+h2,
+h4 {
+  font-weight: normal;
+}
 
 body {
-  font: var(--FSizeMain)/1 "open_sansregular";
+  font: var(--FSizeMain)/1.2 "open_sansregular", sans-serif;
+  color: var(--colorMain);
+  background-color: var(--bgPage);
+  padding-top: 120px;
 }
 
 ul {
@@ -84,16 +94,34 @@ a {
   text-decoration: none;
 }
 
-[class$="-container"] {
+[class*="-container"] {
   max-width: var(--widthMain);
   margin: 0 auto;
   padding: 0 55px;
   @apply --flex-container;
 }
 
+[class*="-section"] {
+  margin-top: 50px;
+  margin-bottom: 250px;
+}
+[class*="-section"]:last-child {
+  margin-bottom: 0;
+}
+
 /* Header */
+.header {
+  background-color: var(--bgPage);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 111;
+}
 .header-container {
   @apply --flex-container;
+  padding-top: 46px;
+  padding-bottom: 46px;
 }
 
 .header-logo {
@@ -101,13 +129,14 @@ a {
   width: 22px;
   height: 16px;
   background: url("../img/bg-logo.png") no-repeat;
+  flex-basis: 14%;
   & a {
     display: block;
   }
 }
 
 .navigation-list {
-  display: flex;
+  display: inline-flex;
   & li {
     margin-left: 35px;
     &:first-child {
@@ -118,8 +147,30 @@ a {
     color: var(--colorMain);
     font-size: var(--FSizeNavigation);
   }
+  & .active a {
+    position: relative;
+    text-indent: -9999px;
+    display: block;
+  }
+  & .active a::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    margin-left: -4px;
+    background-color: var(--bgActiveNavigationLink);
+    box-shadow: 0px 2px 6px 0px rgba(0, 85, 255, .3);
+  }
 }
 
+.download {
+  margin-top: -7px;
+  margin-right: 5px;
+}
 .download-btn {
   font-size: var(--FSizeDownloadBtn);
   color: var(--colorMain);
@@ -135,4 +186,194 @@ a {
     display: inline-block;
     margin-right: 14px;
   }
+}
+
+/* Story Section */
+.picture-frame {
+  margin-right: 113px;
+}
+.text-block-inner {
+  padding: 8px 8px 8px 56px;
+}
+.heading-shadow {
+  font: var(--FSizeShadowHeading)/1 "source_sans_probold", sans-serif;
+  color: var(--colorShadowHeading);
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: -57px;
+}
+.heading {
+  font: var(--FSizePageHeading)/1.1 "robotothin";
+  color: var(--colorPageHeadingFirst);
+  position: relative;
+  padding-top: var(--FSizePageHeading);
+  margin-bottom: 50px;
+}
+.heading-part-2 {
+  color: var(--colorPageHeadingSecond);
+}
+.text {
+  line-height: var(--LineHContent);
+}
+
+/* Skills Section */
+:root {
+  --bgSkillsShadow: 2.8px 2.8px 19px .6px rgba(31, 45, 77, .4);
+
+  --sizeSkill1: 182px;
+  --sizeSkill2: 167px;
+  --sizeSkill3: 108px;
+  --sizeSkill4: 113px;
+  --sizeSkill5: 98px;
+  --sizeSkill6: 80px;
+}
+
+.flex-container-reverse {
+  justify-content: space-around;
+  flex-direction: row-reverse;
+  & .picture-frame {
+    margin-right: 0;
+    position: relative;
+    flex-basis: 50%;
+  }
+  & .text-block {
+    flex-basis: 50%;
+  }
+  & .text-block-inner {
+    padding-left: 0;
+  }
+}
+.skill {
+  color: var(--colorSkills);
+  font-size: var(--FSizeMain);
+  font-weight: normal;
+  font-style: normal;
+  border-radius: 50%;
+  text-align: center;
+  line-height: var(--sizeSkill1);
+  width: var(--sizeSkill1);
+  height: var(--sizeSkill1);
+  background-color: var(--bgSkillsBoxes);
+  box-shadow: var(--bgSkillsShadow);
+  position: absolute;
+  top: 77px;
+  right: 159px;
+}
+.skill:nth-child(2) {
+  width: var(--sizeSkill2);
+  height: var(--sizeSkill2);
+  line-height: var(--sizeSkill2);
+  top: 0;
+  right: 61px;
+}
+.skill:nth-child(3) {
+  width: var(--sizeSkill3);
+  height: var(--sizeSkill3);
+  line-height: var(--sizeSkill3);
+  top: 219px;
+  right: 144px;
+}
+.skill:nth-child(4) {
+  width: var(--sizeSkill4);
+  height: var(--sizeSkill4);
+  line-height: var(--sizeSkill4);
+  top: 147px;
+  right: 69px;
+}
+.skill:nth-child(5) {
+  width: var(--sizeSkill5);
+  height: var(--sizeSkill5);
+  line-height: var(--sizeSkill5);
+  top: 170px;
+  right: 0;
+}
+.skill:nth-child(6) {
+  width: var(--sizeSkill6);
+  height: var(--sizeSkill6);
+  line-height: var(--sizeSkill6);
+  top: 320px;
+  right: 68px;
+}
+
+/* Works Section */
+:root {
+  --bgWorksBoxesHover: color(#125df5 alpha(-25%));
+  --bgWorksShadow: 14px 14px 45px 5px rgba(18, 93, 245, .25);
+}
+.works-section .picture-frame {
+  margin-right: 0;
+}
+.work-inner {
+  display: block;
+  height: 100%;
+  padding: 27px 24px 5px;
+}
+.work {
+  width: 248px;
+  height: 248px;
+  color: var(--colorSkills);
+  font-size: var(--FSizeMain);
+  font-weight: normal;
+  font-style: normal;
+  text-align: left;
+  background-color: var(--bgWorksBoxes);
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: var(--bgWorksBoxesHover);
+    z-index: -1;
+  }
+  &:hover {
+    box-shadow: var(--bgWorksShadow);
+    z-index: 1;
+  }
+}
+.work:nth-child(1) {
+  margin-left: 157px;
+}
+.work:nth-child(2) {
+  margin-top: -98px;
+  &:hover {
+    background: url("../img/bg-works-preview-1.png") no-repeat;
+  }
+}
+.work:nth-child(3) {
+  margin-left: 209px;
+  margin-top: -88px;
+}
+.work-title {
+  color: #fff;
+}
+
+/* Contact Section */
+.contact-section {
+  & .picture-frame {
+    flex-basis: 30%;
+  }
+  & .text-block {
+    flex-basis: 70%;
+    margin-bottom: 100px;
+  }
+}
+.tagline,
+.email,
+.email a {
+  font-style: normal;
+  font-weight: normal;
+  color: var(--colorMain);
+  font-size: inherit;
+}
+.email a {
+  font-family: "open_sanssemibold", sans-serif;
+}
+.bg-contact {
+  background: url("../img/bg-contact-section.png") no-repeat;
+  width: 357px;
+  height: 389px;
 }
