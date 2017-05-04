@@ -8,3 +8,4 @@ const navList = document.querySelector('#nav-list');
 navList.addEventListener('click', e => {
   e.preventDefault();
 });
+console.log(navList);
