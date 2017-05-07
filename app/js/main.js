@@ -3,8 +3,14 @@
 var skillsBox = document.querySelector('#skills-box');
 var skills = document.querySelectorAll('#skills-box .skill');
 
-var navList = document.querySelector('#nav-list');
+skillsBox.addEventListener('mouseover', function (e) {
+  skills.forEach(function (skill) {
+    console.log(skill);
+  });
+  // console.log(e.clientX, e.clientY);
+});
 
+var navList = document.querySelector('#nav-list');
 navList.addEventListener('click', function (e) {
   if (e.target.parentNode.classList != 'active') {
     var _iteratorNormalCompletion = true;
@@ -35,3 +41,10 @@ navList.addEventListener('click', function (e) {
     e.target.parentNode.classList.add('active');
   }
 });
+
+var sections = document.querySelectorAll('.section');
+var sc = sections.forEach(function (section) {
+  return section.getBoundingClientRect(section);
+});
+
+window.addEventListener('scroll', function () {});

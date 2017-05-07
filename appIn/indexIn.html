@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <link rel="stylesheet" href="css/styles.css">
-  <script defer async src="js/main.js"></script>
+  <!--<script defer async src="js/main.js"></script>-->
 </head>
 
 <body>
@@ -33,11 +33,8 @@
   <!-- End Header -->
 
   <!-- Story Section -->
-  <section class="story-section" id="story-section">
-    <div class="story-container">
-      <div class="photo-block picture-frame">
-        <img src="img/img-main-photo.jpg" alt="Photography">
-      </div>
+  <section class="story-section section" id="story-section">
+    <div class="story-container flex-container-reverse">
       <div class="text-block">
         <div class="text-block-inner">
           <h2 class="heading">
@@ -50,21 +47,16 @@
           </div>
         </div>
       </div>
+      <div class="photo-block picture-frame">
+        <img src="img/img-main-photo.jpg" alt="Photography">
+      </div>
     </div>
   </section>
   <!-- End Story Section -->
 
   <!-- Skills Section -->
-  <section class="skills-section" id="skills-section">
-    <div class="skills-container flex-container-reverse">
-      <div class="picture-frame" id="skills-box">
-        <em class="skill">HTML 5</em>
-        <em class="skill">CSS 3</em>
-        <em class="skill">Git</em>
-        <em class="skill">Js</em>
-        <em class="skill">JQuery</em>
-        <em class="skill">PSD</em>
-      </div>
+  <section class="skills-section section" id="skills-section">
+    <div class="skills-container">
       <div class="text-block">
         <div class="text-block-inner">
           <h2 class="heading">
@@ -76,13 +68,32 @@
           </div>
         </div>
       </div>
+      <div class="picture-frame" id="skills-box">
+        <em class="skill">HTML 5</em>
+        <em class="skill">CSS 3</em>
+        <em class="skill">Git</em>
+        <em class="skill">Js</em>
+        <em class="skill">JQuery</em>
+        <em class="skill">PSD</em>
+      </div>
     </div>
   </section>
   <!-- End Skills Section -->
 
   <!-- Works Section -->
-  <section class="works-section" id="works-section">
-    <div class="works-container">
+  <section class="works-section section" id="works-section">
+    <div class="works-container flex-container-reverse">
+      <div class="text-block">
+        <div class="text-block-inner">
+          <h2 class="heading">
+            <strong class="heading-shadow">Works</strong> <span class="heading-part-1">What I </span><span class="heading-part-2">Do</span>
+          </h2>
+          <div class="text">
+            <p>Every project is a new experience and opportunity to learn. Most of all I like those ones that challenge me and
+              require new skills, knowledge and all my patience.</p>
+          </div>
+        </div>
+      </div>
       <div class="picture-frame">
         <div class="work">
           <a href="#" class="work-inner">
@@ -100,27 +111,13 @@
           </a>
         </div>
       </div>
-      <div class="text-block">
-        <div class="text-block-inner">
-          <h2 class="heading">
-            <strong class="heading-shadow">Works</strong> <span class="heading-part-1">What I </span><span class="heading-part-2">Do</span>
-          </h2>
-          <div class="text">
-            <p>Every project is a new experience and opportunity to learn. Most of all I like those ones that challenge me and
-              require new skills, knowledge and all my patience.</p>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
   <!-- End Works Section -->
 
   <!-- Contact Section -->
-  <section class="contact-section" id="contact-section">
-    <div class="contact-container flex-container-reverse">
-      <div class="picture-frame">
-        <div class="bg-contact"></div>
-      </div>
+  <section class="contact-section section" id="contact-section">
+    <div class="contact-container">
       <div class="text-block">
         <div class="text-block-inner">
           <h2 class="heading">
@@ -134,9 +131,14 @@
           </div>
         </div>
       </div>
+      <div class="picture-frame">
+        <div class="bg-contact"></div>
+      </div>
     </div>
   </section>
   <!-- End Contact Section -->
+
+  <script src="js/main.js"></script>
 </body>
 
 </html>
