@@ -1,50 +1,88 @@
 'use strict';
 
-var skillsBox = document.querySelector('#skills-box');
-var skills = document.querySelectorAll('#skills-box .skill');
-
-skillsBox.addEventListener('mouseover', function (e) {
-  skills.forEach(function (skill) {
-    console.log(skill);
-  });
-  // console.log(e.clientX, e.clientY);
-});
-
+var sections = document.querySelectorAll('.section');
 var navList = document.querySelector('#nav-list');
-navList.addEventListener('click', function (e) {
-  if (e.target.parentNode.classList != 'active') {
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
 
-    try {
-      for (var _iterator = navList.children[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var item = _step.value;
+function getActiveLink() {
+  sections.forEach(function (el, i) {
+    var top = el.offsetTop - 300;
+    var bottom = top + el.clientHeight;
+    var scroll = window.pageYOffset;
+    var id = el.getAttribute('id');
+    if (scroll > top && scroll < bottom) {
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
 
-        item.classList.remove('active');
-      }
-    } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
-    } finally {
       try {
-        if (!_iteratorNormalCompletion && _iterator.return) {
-          _iterator.return();
+        for (var _iterator = navList.children[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var item = _step.value;
+
+          item.classList.remove('active');
+          if (item.firstChild.getAttribute('href') == '#' + id) {
+            item.classList.add('active');
+          }
         }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
       } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
         }
       }
     }
-
-    e.target.parentNode.classList.add('active');
-  }
+  });
+}
+document.addEventListener('DOMContentLoaded', function () {
+  getActiveLink();
 });
+window.addEventListener('scroll', function (e) {
+  sections.forEach(function (el, i) {
+    var top = el.offsetTop - 300;
+    var bottom = top + el.clientHeight;
+    var scroll = window.pageYOffset;
+    var id = el.getAttribute('id');
+    if (scroll > top && scroll < bottom) {
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
-var sections = document.querySelectorAll('.section');
-var sc = sections.forEach(function (section) {
-  return section.getBoundingClientRect(section);
+      try {
+        for (var _iterator2 = navList.children[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          var item = _step2.value;
+
+          item.classList.remove('active');
+          if (item.firstChild.getAttribute('href') == '#' + id) {
+            item.classList.add('active');
+          }
+        }
+      } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2.return) {
+            _iterator2.return();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
+      }
+    }
+    navList.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (e.target.getAttribute('href') == '#' + id) {
+        window.scrollTo(0, el.offsetTop - 150);
+      }
+    });
+  });
 });
-
-window.addEventListener('scroll', function () {});

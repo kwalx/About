@@ -1,28 +1,46 @@
 'use strict';
 
-const skillsBox = document.querySelector('#skills-box');
-const skills = document.querySelectorAll('#skills-box .skill');
-
-skillsBox.addEventListener('mouseover', e => {
-  skills.forEach(skill => {
-    console.log(skill);
-  });
-  // console.log(e.clientX, e.clientY);
-});
-
-const navList = document.querySelector('#nav-list');
-navList.addEventListener('click', e => {
-  if (e.target.parentNode.classList != 'active') {
-    for (let item of navList.children) {
-      item.classList.remove('active');
-    }
-    e.target.parentNode.classList.add('active');
-  }
-});
-
 const sections = document.querySelectorAll('.section');
-let sc = sections.forEach(section => {
-  return section.getBoundingClientRect(section);
-});
+const navList = document.querySelector('#nav-list');
 
-window.addEventListener('scroll', () => {});
+function getActiveLink() {
+  sections.forEach((el, i) => {
+    let top = el.offsetTop - 300;
+    let bottom = top + el.clientHeight;
+    let scroll = window.pageYOffset;
+    let id = el.getAttribute('id');
+    if (scroll > top && scroll < bottom) {
+      for (let item of navList.children) {
+        item.classList.remove('active');
+        if (item.firstChild.getAttribute('href') == `#${id}`) {
+          item.classList.add('active');
+        }
+      }
+    }
+  });
+}
+document.addEventListener('DOMContentLoaded', () => {
+  getActiveLink();
+});
+window.addEventListener('scroll', e => {
+  sections.forEach((el, i) => {
+    let top = el.offsetTop - 300;
+    let bottom = top + el.clientHeight;
+    let scroll = window.pageYOffset;
+    let id = el.getAttribute('id');
+    if (scroll > top && scroll < bottom) {
+      for (let item of navList.children) {
+        item.classList.remove('active');
+        if (item.firstChild.getAttribute('href') == `#${id}`) {
+          item.classList.add('active');
+        }
+      }
+    }
+    navList.addEventListener('click', e => {
+      e.preventDefault();
+      if (e.target.getAttribute('href') == `#${id}`) {
+        window.scrollTo(0, el.offsetTop - 150);
+      }
+    });
+  });
+});

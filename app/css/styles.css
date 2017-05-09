@@ -118,7 +118,12 @@ body
 
 [class*='-section']
 {
-    margin-top: 150px;
+    margin-top: 50px;
+}
+
+.section-inner-block
+{
+    min-height: 500px;
 }
 
 .flex-container-reverse
@@ -342,6 +347,7 @@ body
     width: 182px;
     height: 182px;
 
+    transition: all .5s;
     text-align: center;
 
     color: #fff;
@@ -474,6 +480,8 @@ body
 
 .contact-section .picture-frame
 {
+    position: relative;
+
     -ms-flex-preferred-size: 30%;
     flex-basis: 30%;
 }
@@ -497,6 +505,10 @@ body
 }
 .bg-contact
 {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
     width: 357px;
     height: 389px;
 

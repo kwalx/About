@@ -112,7 +112,11 @@ body {
 }
 
 [class*="-section"] {
-  margin-top: 150px;
+  margin-top: 50px;
+}
+
+.section-inner-block {
+  min-height: 500px;
 }
 
 .flex-container-reverse {
@@ -272,6 +276,7 @@ body {
   position: absolute;
   top: 77px;
   right: 159px;
+  transition: all .5s;
 }
 .skill:nth-child(2) {
   width: var(--sizeSkill2);
@@ -370,6 +375,7 @@ body {
 .contact-section {
   & .picture-frame {
     flex-basis: 30%;
+    position: relative;
   }
   & .text-block {
     margin-bottom: 100px;
@@ -390,6 +396,9 @@ body {
   background: url("../img/bg-contact-section.png") no-repeat;
   width: 357px;
   height: 389px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 /* Media Queries */
