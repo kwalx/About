@@ -13,7 +13,7 @@
   });
 
   function getScroll() {
-    sections.forEach(function (el) {
+    sections.forEach(function (el, i) {
       var top = el.offsetTop - 300;
       var bottom = top + el.clientHeight;
       var scroll = window.pageYOffset;
@@ -28,7 +28,7 @@
             var item = _step.value;
 
             item.classList.remove('active');
-            if (item.firstChild.getAttribute('href') == '#' + id) {
+            if (item.firstChild.getAttribute('href') === '#' + id) {
               item.classList.add('active');
               pointer.style.left = item.offsetLeft + item.offsetWidth / 2 + 'px';
               pointer.style.top = item.offsetTop + item.offsetHeight / 2 - pointer.offsetHeight / 2 + 'px';

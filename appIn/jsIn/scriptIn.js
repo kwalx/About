@@ -10,7 +10,7 @@
   });
 
   function getScroll() {
-    sections.forEach(el => {
+    sections.forEach((el, i) => {
       let top = el.offsetTop - 300;
       let bottom = top + el.clientHeight;
       let scroll = window.pageYOffset;
@@ -18,7 +18,7 @@
       if (scroll > top && scroll < bottom) {
         for (let item of navList.children) {
           item.classList.remove('active');
-          if (item.firstChild.getAttribute('href') == `#${id}`) {
+          if (item.firstChild.getAttribute('href') === `#${id}`) {
             item.classList.add('active');
             pointer.style.left = item.offsetLeft + item.offsetWidth / 2 + 'px';
             pointer.style.top =
@@ -41,4 +41,7 @@
       }
     });
   });
+
+  window.addEventListener('scroll', getScroll);
+  getScroll();
 })();
