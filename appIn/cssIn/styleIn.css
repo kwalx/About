@@ -113,11 +113,14 @@ body {
 }
 
 [class*="-section"] {
-  margin-top: 50px;
+  /*margin-top: 50px;*/ /**/
 }
 
 .section-inner-block {
-  min-height: 500px;
+  /*min-height: 500px;*/ /**/
+  
+  padding-top: 10%;
+  height: 100%;
 }
 
 .flex-container-reverse {
@@ -150,8 +153,9 @@ body {
 }
 
 .navigation-list {
-  display: inline-flex;
+  position: relative;
   & li {
+    display: inline-flex;
     margin-left: 35px;
     &:first-child {
       margin-left: 0;
@@ -160,27 +164,33 @@ body {
   & a {
     color: var(--colorMain);
     font-size: var(--FSizeNavigation);
+    transition: all .5s;
+    &:hover {
+      color: var(--bgActiveNavigationLink);
+      text-shadow: 0 0 1px var(--bgActiveNavigationLink);
+    }
   }
   & .active a {
-    position: relative;
-    text-indent: -9999px;
-    display: block;
-  }
-  & .active a::before {
-    content: "";
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    display: block;
-    position: absolute;
-    top: 6px;
-    left: 50%;
-    margin-left: -4px;
-    background-color: var(--bgActiveNavigationLink);
-    box-shadow: 0px 2px 6px 0px rgba(0, 85, 255, .3);
+    transform: scale(1.5);
+    color: #fff;
+    text-shadow: 0 0 8px var(--bgActiveNavigationLink);
+    opacity: 0;
+    transition: all .3s;
   }
 }
-
+.pointer {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  top: 6px;
+  left: 0;
+  margin-left: -4px;
+  background-color: var(--bgActiveNavigationLink);
+  box-shadow: 0 2px 6px 0 rgba(0, 85, 255, .3);
+  transition: all .7s;
+}
 .download {
   margin-top: -7px;
   margin-right: 5px;
@@ -376,11 +386,13 @@ body {
 .contact-section {
   & .picture-frame {
     flex-basis: 30%;
-    position: relative;
   }
   & .text-block {
     margin-bottom: 100px;
   }
+}
+.contact-container {
+  position: relative;
 }
 .tagline,
 .email,
@@ -392,6 +404,23 @@ body {
 }
 .email a {
   font-family: "open_sanssemibold", sans-serif;
+  position: relative;
+  &::before {
+    content: "";
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    background-color: var(--colorPageHeadingSecond);
+    bottom: -2px;
+    left: 0;
+    opacity: 0;
+  }
+  &:hover {
+    color: var(--colorPageHeadingSecond);
+    &:before {
+      opacity: 1;
+    }
+  }
 }
 .bg-contact {
   background: url("../img/bg-contact-section.png") no-repeat;
@@ -404,6 +433,9 @@ body {
 
 /* Media Queries */
 @media (width <= 980px) {
+  .navigation-list li {
+    margin-bottom: 15px;
+  }
   .works-section {
     & .text-block {
       flex-basis: 45%;
