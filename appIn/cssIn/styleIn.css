@@ -102,6 +102,7 @@ body {
   color: var(--colorMain);
   background-color: var(--bgPage);
   padding-top: 120px;
+  min-width: 320px;
 }
 
 [class*="-container"] {
