@@ -431,6 +431,18 @@ body {
   right: 0;
 }
 
+/* Btn Top */
+.btn-top {
+  cursor: pointer;
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  &.visible {
+    display: block;
+  }
+}
+
 /* Media Queries */
 @media (width <= 980px) {
   .navigation-list li {

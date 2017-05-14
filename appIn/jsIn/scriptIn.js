@@ -3,18 +3,27 @@
   const sections = document.querySelectorAll('.section');
   const navList = document.querySelector('#nav-list');
   const pointer = document.querySelector('.pointer');
+  const btnTop = document.querySelector('#btn-top');
 
   sections.forEach(s => {
     s.style.height = window.innerHeight + 'px';
     s.style.minHeight = 650 + 'px';
   });
 
+  /* Active link pointer */
   function getScroll() {
     sections.forEach((el, i) => {
       let top = el.offsetTop - 300;
       let bottom = top + el.clientHeight;
       let scroll = window.pageYOffset;
       let id = el.getAttribute('id');
+
+      if (scroll < 300) {
+        btnTop.classList.remove('visible');
+      } else {
+        btnTop.classList.add('visible');
+      }
+
       if (scroll > top && scroll < bottom) {
         for (let item of navList.children) {
           item.classList.remove('active');
@@ -32,6 +41,7 @@
     });
   }
 
+  /* Anchor link */
   navList.addEventListener('click', e => {
     e.preventDefault();
     sections.forEach(el => {
@@ -44,4 +54,23 @@
 
   window.addEventListener('scroll', getScroll);
   getScroll();
+
+  /* Btn to top */
+  let scrolled;
+  let timer;
+  btnTop.addEventListener('click', () => {
+    scrolled = window.pageYOffset;
+    scrollToTop();
+  });
+
+  function scrollToTop() {
+    if (scrolled > 0) {
+      window.scrollTo(0, scrolled);
+      scrolled -= 100;
+      timer = setTimeout(scrollToTop, 20);
+    } else {
+      clearTimeout(timer);
+      window.scrollTo(0, 0);
+    }
+  }
 })();
