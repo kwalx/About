@@ -29,12 +29,12 @@
 }
 @font-face
 {
-    font-family: 'robotothin';
+    font-family: 'robotolight';
     font-weight: normal;
     font-style: normal;
 
-    src: url('../fonts/roboto-thin-webfont.woff2') format('woff2'),
-    url('../fonts/roboto-thin-webfont.woff') format('woff');
+    src: url('../fonts/roboto-light-webfont.woff2') format('woff2'),
+    url('../fonts/roboto-light-webfont.woff') format('woff');
 }
 
 html,
@@ -319,7 +319,7 @@ body
 }
 .heading
 {
-    font: 40px/1.1 'robotothin';
+    font: 40px/1.1 'robotolight';
 
     position: relative;
 
@@ -557,17 +557,75 @@ body
 /* Btn Top */
 .btn-top
 {
+    font-size: 16px;
+
     position: fixed;
     bottom: 0;
     left: 50%;
 
-    display: none;
+    overflow: hidden;
+
+    width: 86px;
+    margin-left: -43px;
+    padding-top: 48px;
 
     cursor: pointer;
+
+    color: #21252d;
+    border: none;
+    outline: none;
+    background-color: transparent;
 }
-.btn-top.visible
+.btn-top::before
 {
-    display: block;
+    position: absolute;
+    top: -2px;
+    left: 50%;
+
+    width: 1px;
+    height: 48px;
+    margin-left: -1px;
+
+    content: '';
+
+    background-color: #21252d;
+}
+.btn-top:hover.btn-top::before
+{
+    -webkit-animation: btnUp 1.4s linear infinite;
+            animation: btnUp 1.4s linear infinite;
+}
+
+@-webkit-keyframes btnUp
+{
+    0%
+    {
+        top: 0;
+    }
+    50%
+    {
+        top: -20px;
+    }
+    100%
+    {
+        top: 0;
+    }
+}
+
+@keyframes btnUp
+{
+    0%
+    {
+        top: 0;
+    }
+    50%
+    {
+        top: -20px;
+    }
+    100%
+    {
+        top: 0;
+    }
 }
 
 /* Media Queries */

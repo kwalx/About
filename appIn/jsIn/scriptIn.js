@@ -19,9 +19,9 @@
       let id = el.getAttribute('id');
 
       if (scroll < 300) {
-        btnTop.classList.remove('visible');
+        btnTop.textContent = 'Scroll';
       } else {
-        btnTop.classList.add('visible');
+        btnTop.textContent = 'Up';
       }
 
       if (scroll > top && scroll < bottom) {
