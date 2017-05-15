@@ -592,8 +592,8 @@ body
 }
 .btn-top:hover.btn-top::before
 {
-    -webkit-animation: btnUp 1.4s linear infinite;
-            animation: btnUp 1.4s linear infinite;
+    -webkit-animation: btnUp 1.5s linear infinite;
+            animation: btnUp 1.5s linear infinite;
 }
 
 @-webkit-keyframes btnUp

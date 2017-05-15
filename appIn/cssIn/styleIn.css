@@ -458,7 +458,7 @@ body {
     margin-left: -1px;
   }
   &:hover&::before {
-    animation: btnUp 1.4s linear infinite;
+    animation: btnUp 1.5s linear infinite;
   }
 }
 
