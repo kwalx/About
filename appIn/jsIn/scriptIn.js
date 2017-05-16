@@ -5,6 +5,7 @@
   const pointer = document.querySelector('.pointer');
   const btnTop = document.querySelector('#btn-top');
 
+  /* Page resize height */
   sections.forEach(s => {
     s.style.height = window.innerHeight + 'px';
     s.style.minHeight = 650 + 'px';
@@ -12,17 +13,13 @@
 
   /* Active link pointer */
   function getScroll() {
-    sections.forEach((el, i) => {
+    sections.forEach(el => {
       let top = el.offsetTop - 300;
       let bottom = top + el.clientHeight;
       let scroll = window.pageYOffset;
       let id = el.getAttribute('id');
 
-      if (scroll < 300) {
-        btnTop.textContent = 'Scroll';
-      } else {
-        btnTop.textContent = 'Up';
-      }
+      btnTop.textContent = scroll < 300 ? 'Up' : 'Scroll';
 
       if (scroll > top && scroll < bottom) {
         for (let item of navList.children) {

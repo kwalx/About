@@ -8,6 +8,7 @@
   var pointer = document.querySelector('.pointer');
   var btnTop = document.querySelector('#btn-top');
 
+  /* Page resize height */
   sections.forEach(function (s) {
     s.style.height = window.innerHeight + 'px';
     s.style.minHeight = 650 + 'px';
@@ -15,17 +16,13 @@
 
   /* Active link pointer */
   function getScroll() {
-    sections.forEach(function (el, i) {
+    sections.forEach(function (el) {
       var top = el.offsetTop - 300;
       var bottom = top + el.clientHeight;
       var scroll = window.pageYOffset;
       var id = el.getAttribute('id');
 
-      if (scroll < 300) {
-        btnTop.textContent = 'Scroll';
-      } else {
-        btnTop.textContent = 'Up';
-      }
+      btnTop.textContent = scroll < 300 ? 'Up' : 'Scroll';
 
       if (scroll > top && scroll < bottom) {
         var _iteratorNormalCompletion = true;
