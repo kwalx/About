@@ -38,19 +38,44 @@
     });
   }
 
-  /* Anchor link */
-  navList.addEventListener('click', e => {
-    e.preventDefault();
-    sections.forEach(el => {
-      let id = el.getAttribute('id');
-      if (e.target.getAttribute('href') == `#${id}`) {
-        window.scrollTo(0, el.offsetTop - 100);
-      }
-    });
-  });
-
   window.addEventListener('scroll', getScroll);
   getScroll();
+
+  /* Anchor link */
+  const linkNav = document.querySelectorAll('[href^="#nav"]');
+  const V = 0.3;
+  let t;
+  let start;
+
+  linkNav.forEach(link => {
+    link.addEventListener(
+      'click',
+      function(e) {
+        e.preventDefault();
+        let w = window.pageYOffset;
+        let hash = this.href.replace(/[^#]*(.*)/, '$1');
+        (t = document.querySelector(hash).getBoundingClientRect()
+          .top), (start = null);
+        requestAnimationFrame(step);
+        function step(time) {
+          if (start === null) {
+            start = time;
+          }
+          let progress = time - start;
+          let r = t < 0
+            ? Math.max(w - progress / V, w + t)
+            : Math.min(w + progress / V, w + t);
+          window.scrollTo(0, r);
+          if (r != w + t) {
+            requestAnimationFrame(step);
+          } else {
+            location.hash = hash;
+          }
+        }
+      },
+      false
+    );
+  });
 
   /* Btn to top */
   let scrolled;

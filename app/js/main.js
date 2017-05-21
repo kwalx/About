@@ -58,19 +58,37 @@
     });
   }
 
-  /* Anchor link */
-  navList.addEventListener('click', function (e) {
-    e.preventDefault();
-    sections.forEach(function (el) {
-      var id = el.getAttribute('id');
-      if (e.target.getAttribute('href') == '#' + id) {
-        window.scrollTo(0, el.offsetTop - 100);
-      }
-    });
-  });
-
   window.addEventListener('scroll', getScroll);
   getScroll();
+
+  /* Anchor link */
+  var linkNav = document.querySelectorAll('[href^="#nav"]');
+  var V = 0.3;
+  var t = void 0;
+  var start = void 0;
+
+  linkNav.forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      var w = window.pageYOffset;
+      var hash = this.href.replace(/[^#]*(.*)/, '$1');
+      t = document.querySelector(hash).getBoundingClientRect().top, start = null;
+      requestAnimationFrame(step);
+      function step(time) {
+        if (start === null) {
+          start = time;
+        }
+        var progress = time - start;
+        var r = t < 0 ? Math.max(w - progress / V, w + t) : Math.min(w + progress / V, w + t);
+        window.scrollTo(0, r);
+        if (r != w + t) {
+          requestAnimationFrame(step);
+        } else {
+          location.hash = hash;
+        }
+      }
+    }, false);
+  });
 
   /* Btn to top */
   var scrolled = void 0;
