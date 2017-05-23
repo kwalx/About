@@ -1,25 +1,26 @@
+'use strict';
+
 (function() {
-  'use strict';
   const sections = document.querySelectorAll('.section');
   const navList = document.querySelector('#nav-list');
   const pointer = document.querySelector('.pointer');
   const btnTop = document.querySelector('#btn-top');
 
   /* Page resize height */
-  sections.forEach(s => {
+  [].forEach.call(sections, s => {
     s.style.height = window.innerHeight + 'px';
     s.style.minHeight = 650 + 'px';
   });
 
   /* Active link pointer */
   function getScroll() {
-    sections.forEach(el => {
+    [].forEach.call(sections, el => {
       let top = el.offsetTop - 300;
       let bottom = top + el.clientHeight;
       let scroll = window.pageYOffset;
       let id = el.getAttribute('id');
 
-      btnTop.textContent = scroll < 300 ? 'Up' : 'Scroll';
+      btnTop.textContent = scroll < 300 ? 'Scroll' : 'Up';
 
       if (scroll > top && scroll < bottom) {
         for (let item of navList.children) {
@@ -43,11 +44,11 @@
 
   /* Anchor link */
   const linkNav = document.querySelectorAll('[href^="#nav"]');
-  const V = 0.3;
+  const v = 0.3;
   let t;
   let start;
 
-  linkNav.forEach(link => {
+  [].forEach.call(linkNav, link => {
     link.addEventListener(
       'click',
       function(e) {
@@ -63,8 +64,8 @@
           }
           let progress = time - start;
           let r = t < 0
-            ? Math.max(w - progress / V, w + t)
-            : Math.min(w + progress / V, w + t);
+            ? Math.max(w - progress / v, w + t)
+            : Math.min(w + progress / v, w + t);
           window.scrollTo(0, r);
           if (r != w + t) {
             requestAnimationFrame(step);
@@ -96,3 +97,23 @@
     }
   }
 })();
+
+// JQuery
+// $(document).ready(function() {
+//   $('#nav-list').on('click', 'a', function(event) {
+//     event.preventDefault();
+//     var id = $(this).attr('href');
+//     var top = $(id).offset().top;
+//     $('body, html').animate({ scrollTop: top }, 555);
+//   });
+// });
+//
+// navList.addEventListener('click', e => {
+//   e.preventDefault();
+//   sections.forEach(el => {
+//     let id = el.getAttribute('id');
+//     if (e.target.getAttribute('href') == `#${id}`) {
+//       window.scrollTo(0, el.offsetTop - 100);
+//     }
+//   });
+// });

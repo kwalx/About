@@ -1,28 +1,26 @@
 'use strict';
 
 (function () {
-  'use strict';
-
   var sections = document.querySelectorAll('.section');
   var navList = document.querySelector('#nav-list');
   var pointer = document.querySelector('.pointer');
   var btnTop = document.querySelector('#btn-top');
 
   /* Page resize height */
-  sections.forEach(function (s) {
+  [].forEach.call(sections, function (s) {
     s.style.height = window.innerHeight + 'px';
     s.style.minHeight = 650 + 'px';
   });
 
   /* Active link pointer */
   function getScroll() {
-    sections.forEach(function (el) {
+    [].forEach.call(sections, function (el) {
       var top = el.offsetTop - 300;
       var bottom = top + el.clientHeight;
       var scroll = window.pageYOffset;
       var id = el.getAttribute('id');
 
-      btnTop.textContent = scroll < 300 ? 'Up' : 'Scroll';
+      btnTop.textContent = scroll < 300 ? 'Scroll' : 'Up';
 
       if (scroll > top && scroll < bottom) {
         var _iteratorNormalCompletion = true;
@@ -63,11 +61,11 @@
 
   /* Anchor link */
   var linkNav = document.querySelectorAll('[href^="#nav"]');
-  var V = 0.3;
+  var v = 0.3;
   var t = void 0;
   var start = void 0;
 
-  linkNav.forEach(function (link) {
+  [].forEach.call(linkNav, function (link) {
     link.addEventListener('click', function (e) {
       e.preventDefault();
       var w = window.pageYOffset;
@@ -79,7 +77,7 @@
           start = time;
         }
         var progress = time - start;
-        var r = t < 0 ? Math.max(w - progress / V, w + t) : Math.min(w + progress / V, w + t);
+        var r = t < 0 ? Math.max(w - progress / v, w + t) : Math.min(w + progress / v, w + t);
         window.scrollTo(0, r);
         if (r != w + t) {
           requestAnimationFrame(step);
@@ -109,3 +107,23 @@
     }
   }
 })();
+
+// JQuery
+// $(document).ready(function() {
+//   $('#nav-list').on('click', 'a', function(event) {
+//     event.preventDefault();
+//     var id = $(this).attr('href');
+//     var top = $(id).offset().top;
+//     $('body, html').animate({ scrollTop: top }, 555);
+//   });
+// });
+//
+// navList.addEventListener('click', e => {
+//   e.preventDefault();
+//   sections.forEach(el => {
+//     let id = el.getAttribute('id');
+//     if (e.target.getAttribute('href') == `#${id}`) {
+//       window.scrollTo(0, el.offsetTop - 100);
+//     }
+//   });
+// });

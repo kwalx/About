@@ -51,12 +51,14 @@ body
 }
 
 body,
+button,
 h2,
 h4,
 ul,
 p
 {
     margin: 0;
+    padding: 0;
 }
 
 h2,
