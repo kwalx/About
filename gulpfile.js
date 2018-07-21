@@ -1,25 +1,46 @@
 const gulp = require('gulp');
 const postcss = require('gulp-postcss');
 const cssnext = require('postcss-cssnext');
+const cssnano = require('gulp-cssnano');
 const csscomb = require('gulp-csscomb');
 const babel = require('gulp-babel');
+const uglify = require('gulp-uglify');
+const imagemin = require('gulp-imagemin');
+const pngquant = require('gulp-pngquant');
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
+const del = require('del');
+const cache = require('gulp-cache');
 const rename = require('gulp-rename');
-const browserSync = require('browser-sync').create();
-const imagemin = require('gulp-imagemin');
+const bs = require('browser-sync').create();
+
+gulp.task('clean', () => {
+  return del.sync('dist');
+});
+
+gulp.task('clear', () => {
+  return cache.clearAll();
+});
+
+gulp.task('build', ['clean', 'css', 'js', 'img'], () => {
+  let buildHtml = gulp.src('app/*.html').pipe(gulp.dest('dist'));
+  let buildFonts = gulp.src('app/fonts/**/*').pipe(gulp.dest('dist/fonts'));
+  let buildImg = gulp.src('app/img/**/*').pipe(gulp.dest('dist/img'));
+  let buildCss = gulp.src('app/css/*.css').pipe(gulp.dest('dist/css'));
+  let buildJS = gulp.src('app/js/*.js').pipe(gulp.dest('dist/js'));
+});
 
 gulp.task('serv', () => {
-  browserSync.init({
+  bs.init({
     server: {
-      baseDir: './app'
+      baseDir: 'app'
     }
   });
 });
 
 gulp.task('html', () => {
   gulp
-    .src('./appIn/indexIn.html')
+    .src('app/index.html')
     .pipe(
       plumber({
         errorHandler: notify.onError(err => {
@@ -30,15 +51,15 @@ gulp.task('html', () => {
         })
       })
     )
-    .pipe(rename('index.html'))
-    .pipe(gulp.dest('app'))
-    .pipe(browserSync.stream());
+    // .pipe(rename('index.html'))
+    // .pipe(gulp.dest('app'))
+    .pipe(bs.stream());
 });
 
 gulp.task('css', () => {
   let processors = [cssnext];
   gulp
-    .src('./appIn/cssIn/**/*.css')
+    .src('app/src/css/**/*.css')
     .pipe(
       plumber({
         errorHandler: notify.onError(err => {
@@ -50,15 +71,16 @@ gulp.task('css', () => {
       })
     )
     .pipe(postcss(processors))
-    .pipe(rename('styles.css'))
     .pipe(csscomb())
-    .pipe(gulp.dest('./app/css/'))
-    .pipe(browserSync.stream());
+    .pipe(cssnano())
+    .pipe(rename('main.min.css'))
+    .pipe(gulp.dest('app/css/'))
+    .pipe(bs.stream());
 });
 
-gulp.task('babel', () => {
+gulp.task('js', () => {
   gulp
-    .src('./appIn/**/*.js')
+    .src('app/src/**/*.js')
     .pipe(
       plumber({
         errorHandler: notify.onError(err => {
@@ -74,20 +96,38 @@ gulp.task('babel', () => {
         presets: ['es2015']
       })
     )
-    .pipe(rename('main.js'))
-    .pipe(gulp.dest('./app/js/'))
-    .pipe(browserSync.stream());
+    .pipe(uglify())
+    .pipe(rename('main.min.js'))
+    .pipe(gulp.dest('app/js/'))
+    .pipe(bs.stream());
 });
 
-gulp.task('imagemin', () => {
-  gulp.src('./appIn/imgIn/*').pipe(imagemin()).pipe(gulp.dest('./app/img'));
+gulp.task('img', () => {
+  gulp
+    .src('app/src/img/*')
+    .pipe(
+      cache(
+        imagemin({
+          interlaced: true,
+          progressive: true,
+          svgoPlugins: [{ removeViewBox: false }],
+          use: [pngquant]
+        })
+      )
+    )
+    .pipe(gulp.dest('app/img'));
 });
 
-gulp.task('watch', () => {
-  gulp.watch('./appIn/indexIn.html', ['html']);
-  gulp.watch('./appIn/cssIn/**/*.css', ['css']);
-  gulp.watch('./appIn/jsIn/**/*.js', ['babel']);
-  gulp.watch('./appIn/imgIn/*', ['imagemin']);
+gulp.task('fonts', () => {
+  gulp.src('app/src/fonts/**/*').pipe(gulp.dest('app/fonts/'));
 });
 
-gulp.task('default', ['serv', 'html', 'css', 'babel', 'imagemin', 'watch']);
+gulp.task('watch', ['html', 'img', 'fonts', 'css', 'js'], () => {
+  gulp.watch('app/index.html', ['html']);
+  gulp.watch('app/**/*.css', ['css']);
+  gulp.watch('app/**/*.js', ['js']);
+  gulp.watch('app/img/*', ['img']);
+  gulp.watch('app/fonts/*', ['fonts']);
+});
+
+gulp.task('default', ['serv', 'watch']);
