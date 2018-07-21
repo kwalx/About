@@ -4,3 +4,4 @@ app/js
 app/fonts
 app/img
 dist
+package-lock.json
