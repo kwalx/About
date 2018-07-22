@@ -51,8 +51,6 @@ gulp.task('html', () => {
         })
       })
     )
-    // .pipe(rename('index.html'))
-    // .pipe(gulp.dest('app'))
     .pipe(bs.stream());
 });
 
